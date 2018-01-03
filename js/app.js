@@ -1,4 +1,19 @@
 var URL = "http://localhost:8080/api"
+	
+function recupCollaborateurs(event){
+	
+	event.preventDefault();
+	
+	$.getJSON(URL + "/collaborateurs").then(result => {
+		
+		if(result == ""){
+			
+			var collaborateurs = result
+		}
+	
+	})
+	
+}
 
 function valider(event){
 	

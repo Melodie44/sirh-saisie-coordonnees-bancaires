@@ -6,9 +6,19 @@ function recupCollaborateurs(event){
 	
 	$.getJSON(URL + "/collaborateurs").then(result => {
 		
-		if(result == ""){
+		if(result != ""){
 			
-			var collaborateurs = result
+			var collab;
+			var collabs;
+			
+			for(collab in result){
+				
+				collabs += "<tr><td>"+result[collab].matricule+"</td>" +
+							   "<td>"+result[collab].nom+"</td>"+
+							   "<td>"+result[collab].prenom+"</td></tr>"
+			}
+			
+			document.getElementByTagName("tbody").innerHTML = collabs
 		}
 	
 	})

@@ -5,24 +5,19 @@ function recupCollaborateurs(event){
 	event.preventDefault();
 	
 	$.getJSON(URL + "/collaborateurs").then(result => {
+			
+			var collabs = "";
+			result.forEach((c) => {
+				collabs += "<tr>"; 
+				for(variable in c){
+					if(variable == "matricule" || variable == "nom" || variable == "prenom"){
+					collabs += "<td>"+c[variable]+"</td>"}; 
+				}
+				collabs += "</tr>";
+			});
 		
-		if(result != ""){
-			
-			var collab;
-			var collabs;
-			
-			for(collab in result){
-				
-				collabs += "<tr><td>"+result[collab].matricule+"</td>" +
-							   "<td>"+result[collab].nom+"</td>"+
-							   "<td>"+result[collab].prenom+"</td></tr>"
-			}
-			
-			document.getElementByTagName("tbody").innerHTML = collabs
-		}
-	
-	})
-	
+		document.getElementsByTagName("tbody").innerHTML = collabs;
+	});
 }
 
 function valider(event){

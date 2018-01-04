@@ -4,12 +4,10 @@
 <meta charset="UTF-8">
 <title>PAIE</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="js/app.js" type="text/javascript"></script>
-<script type="text/javascript">
-	
-</script>
 </head>
-<body class="container" onload="recupCollaborateurs()">
+<body class="container">
 	<h1>SGP - Saisie des coordonnées bancaires</h1>
 	<div class="row">
 		<div class="col-lg-6">
@@ -21,7 +19,7 @@
 						<td>Prénom</td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody onload="recupCollaborateurs(event)">
 				</tbody>
 			</table>
 		</div>

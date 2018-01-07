@@ -33,9 +33,10 @@ function preChargeInputs(event){
 	
 	$.getJSON(URL + "/collaborateurs/"+event.path[1].firstChild.innerHTML+"/banque").then(result => {
 		
-		document.getElementById("banque").value = result.banque;
+		document.getElementById("banque").value = result.nom;
 		document.getElementById("bic").value = result.bic;
 		document.getElementById("iban").value = result.iban;
+		document.getElementById("champsCache").className = "hidden";
 		
 	}, erreur => {
 		document.getElementById("tab").innerHTML = "<div class=\"alert alert-danger\">Erreur de communication avec l'API backend</div>";
@@ -47,21 +48,23 @@ function valider(event){
 	
 	event.preventDefault();
 	
-	var banque = document.getElementById("banque").value;
+	var nom = document.getElementById("banque").value;
 	var bic = document.getElementById("bic").value;
 	var iban = document.getElementById("iban").value;
-	var collab = {banque: banque, bic: bic, iban: iban};
+	var banqueInfos = {nom: nom, bic: bic, iban: iban};
 
 	$.ajax({
 	    url: URL+"/collaborateurs/"+document.getElementById("champsCache").innerHTML+"/banque",
 	    method: 'PUT',
-	    data: JSON.stringify(collab),
+	    data: JSON.stringify(banqueInfos),
 	    contentType: 'application/json',
 	    success: function(result) {
-	    	console.log(result);
+	    	document.getElementById("champsCache").innerHTML = "<div class=\"alert alert-success\">Modifications enregistrées!</div>";
+	    	document.getElementById("champsCache").className = "show";
 	    },
 	    error: function(request,msg,error) {
 	    	document.getElementById("champsCache").innerHTML = "<div class=\"alert alert-danger\">Erreur de communication avec l'API backend</div>";
+	    	document.getElementById("champsCache").className = "show";
 	    }
 	});
 }
